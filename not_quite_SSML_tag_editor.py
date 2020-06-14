@@ -839,7 +839,7 @@ class TextEditor:                        # mix with menu/toolbar Frame class
         self.onDelete()
 
         text, mp3file = decode(text)
-        os.system("vlc " + mp3file)
+        os.system("start cmd @cmd /k vlc " + mp3file)
 
         self.text.insert(INSERT, text)          # add at current insert cursor
         self.text.tag_remove(SEL, '1.0', END)
