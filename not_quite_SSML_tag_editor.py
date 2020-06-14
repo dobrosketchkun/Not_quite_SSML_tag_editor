@@ -134,11 +134,11 @@ def decode(text):
 	print('url: ', url, '\n')
 
 	r = requests.get(url, allow_redirects=True)
-
-	with open(str(int(time())) + '.mp3', 'wb+') as f:
+	mp3file = str(int(time())) + '.mp3'
+	with open(mp3file, 'wb+') as f:
 		f.write(r.content)
 	
-	return text
+	return text, mp3file
 
 
 
@@ -838,8 +838,8 @@ class TextEditor:                        # mix with menu/toolbar Frame class
 
         self.onDelete()
 
-        text = decode(text)
-
+        text, mp3file = decode(text)
+        os.system("vlc " + mp3file)
 
         self.text.insert(INSERT, text)          # add at current insert cursor
         self.text.tag_remove(SEL, '1.0', END)
