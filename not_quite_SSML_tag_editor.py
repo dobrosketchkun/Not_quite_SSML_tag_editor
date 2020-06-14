@@ -37,31 +37,31 @@ Break = **{500}** = <break time="500ms"> #Pause 500ms
 
 Pitch Hz = [[{150h}...]] = <prosody pitch="150Hz">...</prosody> #Transpose pitch to 150 Hz
 
-or [[{-20h}...]] == <prosody pitch="150Hz">...</prosody> #Lower pitch by 20 Hz from baseline
+or [[{-20h}...]] = <prosody pitch="150Hz">...</prosody> #Lower pitch by 20 Hz from baseline
 
-Pitch st = [[{-12s}...]] == <prosody pitch="-12st">...</prosody> #Lower pitch by 12 semitones from baseline
+Pitch st = [[{-12s}...]] = <prosody pitch="-12st">...</prosody> #Lower pitch by 12 semitones from baseline
 
-Rate words = [{50w}...]] ==  <prosody rate="50">...</prosody> #Set speaking rate at 50 words per minute
+Rate words = [{50w}...]] =  <prosody rate="50">...</prosody> #Set speaking rate at 50 words per minute
 
-Rate % = [[{50%}...]] == <prosody rate="+5%">...</prosody> #Increase speaking rate by 5 percent
+Rate % = [[{50%}...]] = <prosody rate="+5%">...</prosody> #Increase speaking rate by 5 percent
 
-Number = ##{nu}...## == <say-as interpret-as="cardinal">...</say-as> #three
+Number = ##{nu}...## = <say-as interpret-as="cardinal">...</say-as> #three
 
-Ordinal = ##{no}...## == <say-as interpret-as="number" format="ordinal">...</say-as> #third
+Ordinal = ##{no}...## = <say-as interpret-as="number" format="ordinal">...</say-as> #third
 
-Tel. - ##{nt}...##== <say-as interpret-as="number" format="telephone">...</say-as> #555-555-5555
+Tel. - ##{nt}...##= <say-as interpret-as="number" format="telephone">...</say-as> #555-555-5555
 
-Digits = ##{di}...## == <say-as interpret-as="digits">...</say-as> #one two three four
+Digits = ##{di}...## = <say-as interpret-as="digits">...</say-as> #one two three four
 
-Letters = ##{l}...## == <say-as interpret-as="letters">Hello</say-as>
+Letters = ##{l}...## = <say-as interpret-as="letters">Hello</say-as>
 
-Date f = ##{dfXXX}...## == <say-as interpret-as="date" format="XXX">...</say-as> #12/17/2005 - XXX: mdy
+Date f = ##{dfXXX}...## = <say-as interpret-as="date" format="XXX">...</say-as> #12/17/2005 - XXX: mdy
 
-Date vx = ##{vxd}...## ==   <say-as interpret-as="vxml:date">...</say-as> #20050720, ????0720, 200507??
+Date vx = ##{vxd}...## =   <say-as interpret-as="vxml:date">...</say-as> #20050720, ????0720, 200507??
 
-Currency = ##{vxc}...## == <say-as interpret-as="vxml:currency">...</say-as> #USD45.30
+Currency = ##{vxc}...## = <say-as interpret-as="vxml:currency">...</say-as> #USD45.30
 
-IPA = ##{ipa}...## == <phoneme alphabet="ipa" ph="..."></phoneme> #təmˈɑto
+IPA = ##{ipa}...## = <phoneme alphabet="ipa" ph="..."></phoneme> #təmˈɑto
 """
 
 
