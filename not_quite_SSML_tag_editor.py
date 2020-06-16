@@ -18,6 +18,8 @@ from tkinter.messagebox   import showinfo, showerror, askyesno
 from tkinter.simpledialog import askstring, askinteger
 from tkinter.colorchooser import askcolor
 
+from tkinter.font import Font, families
+
 from guimaker import * 
 
 
@@ -586,136 +588,162 @@ class TextEditor:                        # mix with menu/toolbar Frame class
     ############################################################################
     # SSML tags and TTS functhins
     ############################################################################
+    
+    def _bolder(self, text, counter):
+
+            self.text.insert(INSERT, text)          # add at current insert cursor
+            self.text.tag_remove(SEL, '1.0', END)
+            self.text.tag_add(SEL, INSERT+'-%dc' % len(text), INSERT)
+
+            if counter != 1:
+                self.text.tag_add("bold", "sel.first", "sel.last")
+                bold_font = Font(self.text, self.text.cget("font"))
+                size = int(self.text.cget("font").split(' ')[1])
+
+                bold_font.configure(weight="bold", size=size-2, slant="italic")
+                self.text.tag_configure("bold", font=bold_font)
+
+    
     def break_tag(self):
 
             text = '**{50}**'
             self.text.insert(INSERT, text)          # add at current insert cursor
             self.text.tag_remove(SEL, '1.0', END)
             self.text.tag_add(SEL, INSERT+'-%dc' % len(text), INSERT)
-            self.text.see(INSERT)                   # select it, so it can be cut
+
+            self.text.tag_add("bold", "sel.first", "sel.last")
+            bold_font = Font(self.text, self.text.cget("font"))
+            size = int(self.text.cget("font").split(' ')[1])
+
+            bold_font.configure(weight="bold", size=size-2, slant="italic")
+            self.text.tag_configure("bold", font=bold_font)
+
+            # self.text.see(INSERT)                   # select it, so it can be cut
 
 
     def prosody_pitch_h(self):
+
         if not self.text.tag_ranges(SEL):       # save in cross-app clipboard
             showerror('SSMLtagEdit', 'No text selected')
+            return
         else:
             text = self.text.get(SEL_FIRST, SEL_LAST)
             self.clipboard_clear()
             self.clipboard_append(text)
 
             self.onDelete()
-
-            text = '[[{150h}' + self.selection_get(selection='CLIPBOARD') + ']]'
-            self.text.insert(INSERT, text)          # add at current insert cursor
-            self.text.tag_remove(SEL, '1.0', END)
-            self.text.tag_add(SEL, INSERT+'-%dc' % len(text), INSERT)
-            self.text.see(INSERT)                   # select it, so it can be cut
+        counter = 0
+        for i in ['[[{150h}', self.selection_get(selection='CLIPBOARD'),']]']:
+            self._bolder(i, counter)
+            counter +=1
 
 
     def prosody_pitch_s(self):
+
         if not self.text.tag_ranges(SEL):       # save in cross-app clipboard
             showerror('SSMLtagEdit', 'No text selected')
+            return
         else:
             text = self.text.get(SEL_FIRST, SEL_LAST)
             self.clipboard_clear()
             self.clipboard_append(text)
 
             self.onDelete()
-
-            text = '[[{150s}' + self.selection_get(selection='CLIPBOARD') + ']]'
-            self.text.insert(INSERT, text)          # add at current insert cursor
-            self.text.tag_remove(SEL, '1.0', END)
-            self.text.tag_add(SEL, INSERT+'-%dc' % len(text), INSERT)
-            self.text.see(INSERT)                   # select it, so it can be cut
+        counter = 0
+        for i in ['[[{15s}', self.selection_get(selection='CLIPBOARD'),']]']:
+            self._bolder(i, counter)
+            counter +=1
 
 
     def prosody_pitch_w(self):
+
         if not self.text.tag_ranges(SEL):       # save in cross-app clipboard
             showerror('SSMLtagEdit', 'No text selected')
+            return
         else:
             text = self.text.get(SEL_FIRST, SEL_LAST)
             self.clipboard_clear()
             self.clipboard_append(text)
 
             self.onDelete()
+        counter = 0
+        for i in ['[[{150w}', self.selection_get(selection='CLIPBOARD'),']]']:
+            self._bolder(i, counter)
+            counter +=1
 
-            text = '[[{150w}' + self.selection_get(selection='CLIPBOARD') + ']]'
-            self.text.insert(INSERT, text)          # add at current insert cursor
-            self.text.tag_remove(SEL, '1.0', END)
-            self.text.tag_add(SEL, INSERT+'-%dc' % len(text), INSERT)
-            self.text.see(INSERT)                   # select it, so it can be cut
 
 
 
     def prosody_pitch_r(self):
+
         if not self.text.tag_ranges(SEL):       # save in cross-app clipboard
             showerror('SSMLtagEdit', 'No text selected')
+            return
         else:
             text = self.text.get(SEL_FIRST, SEL_LAST)
             self.clipboard_clear()
             self.clipboard_append(text)
 
             self.onDelete()
-
-            text = '[[{150%}' + self.selection_get(selection='CLIPBOARD') + ']]'
-            self.text.insert(INSERT, text)          # add at current insert cursor
-            self.text.tag_remove(SEL, '1.0', END)
-            self.text.tag_add(SEL, INSERT+'-%dc' % len(text), INSERT)
-            self.text.see(INSERT)                   # select it, so it can be cut
-
+        counter = 0
+        for i in ['[[{150%}', self.selection_get(selection='CLIPBOARD'),']]']:
+            self._bolder(i, counter)
+            counter +=1
 
 
     def say_as_nu(self):
 
         if not self.text.tag_ranges(SEL):       # save in cross-app clipboard
             showerror('SSMLtagEdit', 'No text selected')
+            return
         else:
             text = self.text.get(SEL_FIRST, SEL_LAST)
             self.clipboard_clear()
             self.clipboard_append(text)
 
             self.onDelete()
+        counter = 0
+        for i in ['##{nu}', self.selection_get(selection='CLIPBOARD'),'##']:
+            self._bolder(i, counter)
+            counter +=1
 
-            text = '##{nu}' + self.selection_get(selection='CLIPBOARD') + '##'
-            self.text.insert(INSERT, text)          # add at current insert cursor
-            self.text.tag_remove(SEL, '1.0', END)
-            self.text.tag_add(SEL, INSERT+'-%dc' % len(text), INSERT)
-            self.text.see(INSERT)                   # select it, so it can be cut
+
 
 
     def say_as_no(self):
 
         if not self.text.tag_ranges(SEL):       # save in cross-app clipboard
             showerror('SSMLtagEdit', 'No text selected')
+            return
         else:
             text = self.text.get(SEL_FIRST, SEL_LAST)
             self.clipboard_clear()
             self.clipboard_append(text)
 
             self.onDelete()
+        counter = 0
+        for i in ['##{no}', self.selection_get(selection='CLIPBOARD'),'##']:
+            self._bolder(i, counter)
+            counter +=1
 
-            text = '##{no}' + self.selection_get(selection='CLIPBOARD') + '##'
-            self.text.insert(INSERT, text)          # add at current insert cursor
-            self.text.tag_remove(SEL, '1.0', END)
-            self.text.tag_add(SEL, INSERT+'-%dc' % len(text), INSERT)
-            self.text.see(INSERT)                   # select it, so it can be cut
 
     def say_as_nt(self):
 
         if not self.text.tag_ranges(SEL):       # save in cross-app clipboard
             showerror('SSMLtagEdit', 'No text selected')
+            return
         else:
             text = self.text.get(SEL_FIRST, SEL_LAST)
             self.clipboard_clear()
             self.clipboard_append(text)
 
             self.onDelete()
+        counter = 0
+        for i in ['##{nt}', self.selection_get(selection='CLIPBOARD'),'##']:
+            self._bolder(i, counter)
+            counter +=1
 
-            text = '##{nt}' + self.selection_get(selection='CLIPBOARD') + '##'
-            self.text.insert(INSERT, text)          # add at current insert cursor
-            self.text.tag_remove(SEL, '1.0', END)
-            self.text.tag_add(SEL, INSERT+'-%dc' % len(text), INSERT)
-            self.text.see(INSERT)                   # select it, so it can be cut
+
 
 
 
@@ -723,106 +751,108 @@ class TextEditor:                        # mix with menu/toolbar Frame class
 
         if not self.text.tag_ranges(SEL):       # save in cross-app clipboard
             showerror('SSMLtagEdit', 'No text selected')
+            return
         else:
             text = self.text.get(SEL_FIRST, SEL_LAST)
             self.clipboard_clear()
             self.clipboard_append(text)
 
             self.onDelete()
+        counter = 0
+        for i in ['##{di}', self.selection_get(selection='CLIPBOARD'),'##']:
+            self._bolder(i, counter)
+            counter +=1
 
-            text = '##{di}' + self.selection_get(selection='CLIPBOARD') + '##'
-            self.text.insert(INSERT, text)          # add at current insert cursor
-            self.text.tag_remove(SEL, '1.0', END)
-            self.text.tag_add(SEL, INSERT+'-%dc' % len(text), INSERT)
-            self.text.see(INSERT)                   # select it, so it can be cut
 
 
     def say_as_l(self):
 
         if not self.text.tag_ranges(SEL):       # save in cross-app clipboard
             showerror('SSMLtagEdit', 'No text selected')
+            return
         else:
             text = self.text.get(SEL_FIRST, SEL_LAST)
             self.clipboard_clear()
             self.clipboard_append(text)
 
             self.onDelete()
+        counter = 0
+        for i in ['##{l}', self.selection_get(selection='CLIPBOARD'),'##']:
+            self._bolder(i, counter)
+            counter +=1
 
-            text = '##{l}' + self.selection_get(selection='CLIPBOARD') + '##'
-            self.text.insert(INSERT, text)          # add at current insert cursor
-            self.text.tag_remove(SEL, '1.0', END)
-            self.text.tag_add(SEL, INSERT+'-%dc' % len(text), INSERT)
-            self.text.see(INSERT)                   # select it, so it can be cut
 
 
     def say_as_df(self):
 
         if not self.text.tag_ranges(SEL):       # save in cross-app clipboard
             showerror('SSMLtagEdit', 'No text selected')
+            return
         else:
             text = self.text.get(SEL_FIRST, SEL_LAST)
             self.clipboard_clear()
             self.clipboard_append(text)
 
             self.onDelete()
+        counter = 0
+        for i in ['##{dfXXX}', self.selection_get(selection='CLIPBOARD'),'##']:
+            self._bolder(i, counter)
+            counter +=1
 
-            text = '##{dfXXX}' + self.selection_get(selection='CLIPBOARD') + '##'
-            self.text.insert(INSERT, text)          # add at current insert cursor
-            self.text.tag_remove(SEL, '1.0', END)
-            self.text.tag_add(SEL, INSERT+'-%dc' % len(text), INSERT)
-            self.text.see(INSERT)                   # select it, so it can be cut
+
 
     def say_as_vxc(self):
 
         if not self.text.tag_ranges(SEL):       # save in cross-app clipboard
             showerror('SSMLtagEdit', 'No text selected')
+            return
         else:
             text = self.text.get(SEL_FIRST, SEL_LAST)
             self.clipboard_clear()
             self.clipboard_append(text)
 
             self.onDelete()
+        counter = 0
+        for i in ['##{vxc}', self.selection_get(selection='CLIPBOARD'),'##']:
+            self._bolder(i, counter)
+            counter +=1
 
-            text = '##{vxc}' + self.selection_get(selection='CLIPBOARD') + '##'
-            self.text.insert(INSERT, text)          # add at current insert cursor
-            self.text.tag_remove(SEL, '1.0', END)
-            self.text.tag_add(SEL, INSERT+'-%dc' % len(text), INSERT)
-            self.text.see(INSERT)                   # select it, so it can be cut
+
+
 
     def say_as_vxd(self):
 
         if not self.text.tag_ranges(SEL):       # save in cross-app clipboard
             showerror('SSMLtagEdit', 'No text selected')
+            return
         else:
             text = self.text.get(SEL_FIRST, SEL_LAST)
             self.clipboard_clear()
             self.clipboard_append(text)
 
             self.onDelete()
+        counter = 0
+        for i in ['##{vxd}',self.selection_get(selection='CLIPBOARD'),'##']:
+            self._bolder(i, counter)
+            counter +=1
 
-            text = '##{vxd}' + self.selection_get(selection='CLIPBOARD') + '##'
-            self.text.insert(INSERT, text)          # add at current insert cursor
-            self.text.tag_remove(SEL, '1.0', END)
-            self.text.tag_add(SEL, INSERT+'-%dc' % len(text), INSERT)
-            self.text.see(INSERT)                   # select it, so it can be cut
-
+ 
 
     def say_as_ipa(self):
 
         if not self.text.tag_ranges(SEL):       # save in cross-app clipboard
             showerror('SSMLtagEdit', 'No text selected')
+            return
         else:
             text = self.text.get(SEL_FIRST, SEL_LAST)
             self.clipboard_clear()
             self.clipboard_append(text)
 
             self.onDelete()
-
-            text = '##{ipa}' + self.selection_get(selection='CLIPBOARD') + '##'
-            self.text.insert(INSERT, text)          # add at current insert cursor
-            self.text.tag_remove(SEL, '1.0', END)
-            self.text.tag_add(SEL, INSERT+'-%dc' % len(text), INSERT)
-            self.text.see(INSERT)                   # select it, so it can be cut
+        counter = 0
+        for i in ['##{ipa}', self.selection_get(selection='CLIPBOARD'),'##']:
+            self._bolder(i, counter)
+            counter +=1
 
 
 
