@@ -2,13 +2,13 @@
 
 Shitty text editor / tag editor primarely based on [PyEditor](https://resources.oreilly.com/examples/9780596158118/tree/a5bcfbf9b81157d6dbbea72c00fa11b5f38dd9c9/PP4E-Examples-1.4/Examples/PP4E/Gui/TextEditor).
 
-## What it can do?
+## What can it do?
 
-It can paste my wrapper-tags around text and then download mp3 file from IBM TTS. Also can download mp3 with generated speach from [IBM TTS](https://text-to-speech-demo.ng.bluemix.net/)
+It can paste my wrapper-tags around text and then download mp3 file from IBM TTS. It also can download mp3 with generated speach from [IBM TTS](https://text-to-speech-demo.ng.bluemix.net/)
 
 ## Why?
 
-Original tags are just way to hard to read and manualy insert
+Original tags are just way too hard to read and manualy insert
 
 -------
 
@@ -22,7 +22,7 @@ Original tags are just way to hard to read and manualy insert
 
 * Rate words = [{50w}...]] =  <prosody rate="50">...</prosody> #Set speaking rate at 50 words per minute   
 
-* Rate % = [[{50%}...]] = <prosody rate="+5%">...</prosody> #Increase speaking rate by 5 percent   
+* Rate % = [[{50%}...]] = <prosody rate="+5%">...</prosody> #Increase speaking rate by 50 percent   
 
 * Number = ##{nu}...## = <say-as interpret-as="cardinal">...</say-as> #three   
 
